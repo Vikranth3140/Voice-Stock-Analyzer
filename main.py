@@ -29,16 +29,36 @@ class StockAnalyzer:
             print(self.time_series)
 
     def fetch_stock_data(self):
-        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_{self.time_series}_ADJUSTED&symbol={self.stock_name}.BSE&outputsize=full&apikey=X6IQZUMIBD421RAY'
-        r = requests.get(url)
-        self.data = r.json()
-        print(self.data)
+        function = f'TIME_SERIES_{self.time_series}_ADJUSTED'
+        symbol = f'{self.stock_name}.BSE'
+        base_url = 'https://www.alphavantage.co/query'
+        params = {
+            'function': function,
+            'symbol': symbol,
+            'outputsize': 'full',
+            'apikey': 'X6IQZUMIBD421RAY'
+        }
+        r = requests.get(base_url, params=params)
+
+        if r.status_code == 200:
+            self.data = r.json()
+            print(self.data)
+        else:
+            print(f"Error fetching data: {r.status_code} - {r.text}")
 
     def get_stock_price(self):
         date = input('Enter the date in the format (yyyy-mm-dd): ')
         self.date = date
-        stock_prices = list(list(self.data.values()))[1][date]
-        print(stock_prices)
+
+        if 'Time Series' in self.data:
+            time_series_data = self.data['Time Series']
+            if date in time_series_data:
+                stock_prices = time_series_data[date]
+                print(stock_prices)
+            else:
+                print(f"No data available for date {date}")
+        else:
+            print("Error: No 'Time Series' data found in the API response.")
 
     def open(self):
         print(list(self.data.values())[1][self.date]['1. open'])
@@ -77,5 +97,6 @@ class StockAnalyzer:
         top.mainloop()
 
 # Create an instance of the StockAnalyzer class and run the program
-analyzer = StockAnalyzer()
-analyzer.run()
+if __name__ == "__main__":
+    analyzer = StockAnalyzer()
+    analyzer.run()
