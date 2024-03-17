@@ -36,7 +36,7 @@ class StockAnalyzer:
             'function': function,
             'symbol': symbol,
             'outputsize': 'full',
-            'apikey': 'X6IQZUMIBD421RAY'
+            'apikey': 'D1ZC89F5JVIURMYF' # Replace with your own API key
         }
         r = requests.get(base_url, params=params)
 
