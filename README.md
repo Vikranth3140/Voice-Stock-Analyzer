@@ -3,6 +3,8 @@ Voice Stock Analyzer
 
 Voice Stock Analyzer is a Python-based tool that allows users to analyze stock data using speech recognition and the [Alpha Vantage](https://www.alphavantage.co/) API.
 
+https://github.com/Vikranth3140/Voice-Stock-Analyzer/assets/122410275/873d3cc1-804b-493a-b2da-9e36b035902d
+
 Features
 --------
 
