@@ -1,2 +1,2 @@
-SpeechRecognition==3.8.1
+SpeechRecognition==3.10.4
 requests==2.32.2
